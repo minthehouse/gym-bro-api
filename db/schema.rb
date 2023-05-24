@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_224552) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_232140) do
   create_table "exercise_sets", force: :cascade do |t|
     t.decimal "weight"
     t.integer "rep"
@@ -33,9 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_224552) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.string "preferred_unit_for_weight"
-    t.integer "height"
-    t.decimal "weight"
+    t.integer "preferred_unit_for_weight", default: 0
+    t.float "height"
+    t.float "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
