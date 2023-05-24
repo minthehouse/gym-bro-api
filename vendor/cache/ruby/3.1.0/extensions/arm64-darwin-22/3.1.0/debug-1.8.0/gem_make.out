@@ -1,0 +1,16 @@
+current directory: /Users/temp/Documents/GitHub/gym-bro-api/vendor/cache/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+/Users/temp/.rbenv/versions/3.1.3/bin/ruby -I /Users/temp/.rbenv/versions/3.1.3/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/temp/Documents/GitHub/gym-bro-api/vendor/cache/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230522-83615-8yylgu sitelibdir\=./.gem.20230522-83615-8yylgu clean
+
+current directory: /Users/temp/Documents/GitHub/gym-bro-api/vendor/cache/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230522-83615-8yylgu sitelibdir\=./.gem.20230522-83615-8yylgu
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+
+current directory: /Users/temp/Documents/GitHub/gym-bro-api/vendor/cache/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230522-83615-8yylgu sitelibdir\=./.gem.20230522-83615-8yylgu install
+/usr/bin/install -c -m 0755 debug.bundle ./.gem.20230522-83615-8yylgu/debug

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  preferred_unit_for_weight: MyString
+  height: 1
+  weight: 9.99
+  pw: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  preferred_unit_for_weight: MyString
+  height: 1
+  weight: 9.99
+  pw: MyString
