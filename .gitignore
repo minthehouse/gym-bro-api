@@ -1,2 +1,7 @@
-tmp/cache/bootsnap/compile-cache-iseq/*
 log/development.log
+tmp/cache/assets/*
+tmp/cache/bootsnap/*
+tmp/cache/bootsnap/load-path-cache
+tmp/cache/bootsnap/compile-cache-iseq/5a/efd7e67e9d6e7a
+db/test.sqlite3
+log/test.log
