@@ -32,4 +32,10 @@ class WorkoutTest < ActiveSupport::TestCase
     assert_not workout.valid?
     assert_includes workout.errors[:end_at], "Cannot be before start_at"
   end
+
+  test "requires user association" do
+    workout = Workout.new(user:nil)
+    assert_not workout.valid?
+    assert_includes workout.errors[:user], "must exist"
+  end
 end
