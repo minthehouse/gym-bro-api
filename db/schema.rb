@@ -10,14 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_232140) do
-  create_table "exercise_sets", force: :cascade do |t|
-    t.decimal "weight"
-    t.integer "rep"
-    t.integer "exercise_id", null: false
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_170735) do
+  create_table "exercise_types", force: :cascade do |t|
+    t.string "name"
+    t.string "muscle_group"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exercise_id"], name: "index_exercise_sets_on_exercise_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -26,6 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_232140) do
     t.integer "workout_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "exercise_set_id"
+    t.index ["exercise_set_id"], name: "index_exercises_on_exercise_set_id"
     t.index ["workout_id"], name: "index_exercises_on_workout_id"
   end
 
@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_232140) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.integer "preferred_unit_for_weight", default: 0
+    t.integer "preferred_unit_for_weight", default: 0, null: false
     t.float "height"
     t.float "weight"
     t.datetime "created_at", null: false
@@ -44,10 +44,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_232140) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "duration_in_minutes"
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
-  add_foreign_key "exercise_sets", "exercises"
+  add_foreign_key "exercises", "exercise_sets"
   add_foreign_key "exercises", "workouts"
   add_foreign_key "workouts", "users"
 end

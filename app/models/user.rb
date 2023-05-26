@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :workouts
-  enum preferred_unit_for_weight: { kg: 0, lbs: 1 }
+  enum preferred_unit_for_weight: { lbs: 0, kg: 1 }
 
   # Validations
   validates :first_name, presence: true
