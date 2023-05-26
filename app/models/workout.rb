@@ -10,6 +10,8 @@ class Workout < ApplicationRecord
   validate :valid_start_at?
   validate :valid_end_at?
 
+  accepts_nested_attributes_for :exercises
+
   private
 
   def must_have_at_least_one_exercise

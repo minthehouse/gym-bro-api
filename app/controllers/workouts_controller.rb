@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only [:show, :update, :destroy]
+  before_action :set_workout, only: [:show, :update, :destroy]
 
   # GET /workouts
   def index
@@ -49,6 +49,7 @@ class WorkoutsController < ApplicationController
       :start_at,
       :end_at,
       :duration_in_minutes,
+      exercises_attributes: [:name, :weight, :rep, :exercise_type_id]
     )
   end
   

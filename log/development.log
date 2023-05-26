@@ -400,3 +400,144 @@ Migrating to AddIndexToExerciseTypeIdInExercises (20230526182416)
   [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mExerciseType Load (0.1ms)[0m  [1m[34mSELECT "exercise_types".* FROM "exercise_types" WHERE "exercise_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mExerciseType Load (0.1ms)[0m  [1m[34mSELECT "exercise_types".* FROM "exercise_types" WHERE "exercise_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mExerciseType Create (2.0ms)[0m  [1m[32mINSERT INTO "exercise_types" ("name", "muscle_group", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bench Press"], ["muscle_group", "Chest"], ["created_at", "2023-05-26 19:58:18.181377"], ["updated_at", "2023-05-26 19:58:18.181377"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mExerciseType Load (0.2ms)[0m  [1m[34mSELECT "exercise_types".* FROM "exercise_types" WHERE "exercise_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mWorkout Create (0.6ms)[0m  [1m[32mINSERT INTO "workouts" ("user_id", "created_at", "updated_at", "start_at", "end_at", "duration_in_minutes") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["created_at", "2023-05-26 19:58:40.925656"], ["updated_at", "2023-05-26 19:58:40.925656"], ["start_at", "2023-05-26 17:58:30.058005"], ["end_at", "2023-05-26 18:58:30.058051"], ["duration_in_minutes", 60]]
+  [1m[36mExercise Create (0.2ms)[0m  [1m[32mINSERT INTO "exercises" ("name", "workout_id", "created_at", "updated_at", "weight", "rep", "exercise_type_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "benchpress"], ["workout_id", 1], ["created_at", "2023-05-26 19:58:40.927340"], ["updated_at", "2023-05-26 19:58:40.927340"], ["weight", 135.0], ["rep", 3], ["exercise_type_id", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mExerciseType Load (0.1ms)[0m  [1m[34mSELECT "exercise_types".* FROM "exercise_types" WHERE "exercise_types"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mWorkout Create (0.6ms)[0m  [1m[32mINSERT INTO "workouts" ("user_id", "created_at", "updated_at", "start_at", "end_at", "duration_in_minutes") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["created_at", "2023-05-26 20:18:13.516199"], ["updated_at", "2023-05-26 20:18:13.516199"], ["start_at", "2023-05-26 18:18:00.868555"], ["end_at", "2023-05-26 19:18:00.868637"], ["duration_in_minutes", 60]]
+  [1m[36mExercise Create (0.1ms)[0m  [1m[32mINSERT INTO "exercises" ("name", "workout_id", "created_at", "updated_at", "weight", "rep", "exercise_type_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "benchpress"], ["workout_id", 2], ["created_at", "2023-05-26 20:18:13.517666"], ["updated_at", "2023-05-26 20:18:13.517666"], ["weight", 135.0], ["rep", 3], ["exercise_type_id", 1]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "exercise_types"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "muscle_group" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "exercises"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "exercises" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "workout_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "weight" float, "rep" integer, "exercise_type_id" integer)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_exercises_on_exercise_type_id" ON "exercises" ("exercise_type_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_exercises_on_workout_id" ON "exercises" ("workout_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "preferred_unit_for_weight" integer DEFAULT 0 NOT NULL, "height" float, "weight" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "workouts"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "workouts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "start_at" datetime(6), "end_at" datetime(6), "duration_in_minutes" integer)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_workouts_on_user_id" ON "workouts" ("user_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercises" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "workout_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "weight" float DEFAULT NULL, "rep" integer DEFAULT NULL, "exercise_type_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aexercises_on_workout_id" ON "aexercises" ("workout_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aexercises_on_exercise_type_id" ON "aexercises" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercises" ("id","name","workout_id","created_at","updated_at","weight","rep","exercise_type_id")
+                     SELECT "id","name","workout_id","created_at","updated_at","weight","rep","exercise_type_id" FROM "exercises"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "exercises"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercises" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "workout_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "weight" float DEFAULT NULL, "rep" integer DEFAULT NULL, "exercise_type_id" integer DEFAULT NULL, CONSTRAINT "fk_rails_ee53b1f0ea"
+FOREIGN KEY ("workout_id")
+  REFERENCES "workouts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_exercises_on_exercise_type_id" ON "exercises" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_exercises_on_workout_id" ON "exercises" ("workout_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "exercises" ("id","name","workout_id","created_at","updated_at","weight","rep","exercise_type_id")
+                     SELECT "id","name","workout_id","created_at","updated_at","weight","rep","exercise_type_id" FROM "aexercises"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aexercises"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aworkouts" ("id" integer NOT NULL PRIMARY KEY, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "start_at" datetime(6) DEFAULT NULL, "end_at" datetime(6) DEFAULT NULL, "duration_in_minutes" integer DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aworkouts_on_user_id" ON "aworkouts" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aworkouts" ("id","user_id","created_at","updated_at","start_at","end_at","duration_in_minutes")
+                     SELECT "id","user_id","created_at","updated_at","start_at","end_at","duration_in_minutes" FROM "workouts"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "workouts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "workouts" ("id" integer NOT NULL PRIMARY KEY, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "start_at" datetime(6) DEFAULT NULL, "end_at" datetime(6) DEFAULT NULL, "duration_in_minutes" integer DEFAULT NULL, CONSTRAINT "fk_rails_40b8fd8af6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_workouts_on_user_id" ON "workouts" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "workouts" ("id","user_id","created_at","updated_at","start_at","end_at","duration_in_minutes")
+                     SELECT "id","user_id","created_at","updated_at","start_at","end_at","duration_in_minutes" FROM "aworkouts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aworkouts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20230526182416)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20230524222806),
+(20230524222823),
+(20230524224440),
+(20230524224552),
+(20230524230309),
+(20230524231244),
+(20230524232140),
+(20230525211122),
+(20230526154630),
+(20230526170735),
+(20230526174013),
+(20230526174449),
+(20230526174720);
+
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-05-26 20:20:14.824595"], ["updated_at", "2023-05-26 20:20:14.824595"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2023-05-26 20:20:14.826742"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "01f0d81c5450580e31e4be78f25c6d74cecdb83b"], ["created_at", "2023-05-26 20:20:14.828593"], ["updated_at", "2023-05-26 20:20:14.828593"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mExerciseType Create (0.4ms)[0m  [1m[32mINSERT INTO "exercise_types" ("name", "muscle_group", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Squats"], ["muscle_group", "Lower Body"], ["created_at", "2023-05-26 20:22:25.056420"], ["updated_at", "2023-05-26 20:22:25.056420"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mWorkout Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "workouts"[0m
