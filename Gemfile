@@ -70,3 +70,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# to include the necessary CORS headers
+gem 'rack-cors'
+
+
+gem 'devise_token_auth'

@@ -4,4 +4,6 @@ class Exercise < ApplicationRecord
 
   validates :weight, presence: true, numericality: { float: true }
   validates :rep, presence: true, numericality: { only_integer: true }
+
+  attribute :exercise_type_id, :integer
 end

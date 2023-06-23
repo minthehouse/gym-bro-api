@@ -7,9 +7,12 @@
 # Visit https://pragprog.com/titles/rails7 for more book information.
 #---
 Rails.application.routes.draw do
-  resources :users
-  resources :workouts, only: [:index, :show, :create, :update, :destroy]
+  resources :users, only: [:index, :show, :create, :update, :destroy]
+  resources :workouts, only: [:index, :show, :update, :destroy]
+  post '/workout', to: 'workouts#create'
 
+  resources :exercises, only: [:index, :show, :create, :update, :destroy]
+  resources :exercise_types, only: [:index, :show, :create, :update, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

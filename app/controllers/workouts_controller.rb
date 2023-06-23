@@ -13,9 +13,19 @@ class WorkoutsController < ApplicationController
   end
 
   # POST /workouts
-  def create
-    @workout = Workout.new(workout_params)
 
+  def create
+    workout_params = params.require(:workout).permit(:user_id, :start_at, :end_at, :duration_in_minutes, exercises_attributes: [:set_number, :weight_in_kg, :repetitions, :exercise_type_id, :exercise_name])
+  
+    exercises_params = workout_params[:exercises_attributes]
+    workout_params[:exercises_attributes] = []
+  
+    exercises_params.each do |_key, exercise|
+      workout_params[:exercises_attributes] << exercise
+    end
+  
+    @workout = Workout.new(workout_params)
+  
     if @workout.save
       render json: @workout, status: :created
     else
@@ -44,13 +54,7 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(
-      :user_id,
-      :start_at,
-      :end_at,
-      :duration_in_minutes,
-      exercises_attributes: [:name, :weight, :rep, :exercise_type_id]
-    )
+    params.require(:workout).permit(:user_id, :start_at, :end_at, :duration_in_minutes, exercises_attributes: [:set, :weight, :reps, :exercise_type_id, :exercise_name])
   end
   
 end

@@ -15,7 +15,7 @@ class Workout < ApplicationRecord
   private
 
   def must_have_at_least_one_exercise
-    errors.add(:base, "Workout must have at least one exercise") if exercises.empty?
+    errors.add(:base, "Workout must have at least one exercise") if exercises.blank? || exercises.all?(&:marked_for_destruction?)
   end
 
   def valid_start_at?
