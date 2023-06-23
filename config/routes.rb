@@ -7,6 +7,7 @@
 # Visit https://pragprog.com/titles/rails7 for more book information.
 #---
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
   resources :users, only: [:index, :show, :create, :update, :destroy]
   resources :workouts, only: [:index, :show, :update, :destroy]
   post '/workout', to: 'workouts#create'

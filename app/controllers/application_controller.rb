@@ -7,4 +7,5 @@
 # Visit https://pragprog.com/titles/rails7 for more book information.
 #---
 class ApplicationController < ActionController::Base
+        include DeviseTokenAuth::Concerns::SetUserByToken
 end
