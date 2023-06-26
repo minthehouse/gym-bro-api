@@ -1,5 +1,6 @@
 class ExerciseTypesController < ApplicationController
   before_action :set_exercise_type, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @exercise_types = ExerciseType.all
