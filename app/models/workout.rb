@@ -1,5 +1,4 @@
 class Workout < ApplicationRecord
-  # belongs_to :user
   has_many :exercises
 
   attribute :start_at, :datetime
