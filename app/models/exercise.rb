@@ -6,4 +6,5 @@ class Exercise < ApplicationRecord
   validates :rep, presence: true, numericality: { only_integer: true }
 
   attribute :exercise_type_id, :integer
+  attribute :set_number, :integer
 end
