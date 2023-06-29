@@ -13,3 +13,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+MuscleGroup.create(name: 'Shoulder')
+MuscleGroup.create(name: 'Leg')
+MuscleGroup.create(name: 'Back')
+MuscleGroup.create(name: 'Chest')

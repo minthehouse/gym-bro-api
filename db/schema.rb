@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_26_234425) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_234429) do
   create_table "exercise_types", force: :cascade do |t|
     t.string "name"
     t.string "muscle_group"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "muscle_group_id"
+    t.index ["muscle_group_id"], name: "index_exercise_types_on_muscle_group_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -28,6 +30,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_26_234425) do
     t.integer "exercise_type_id"
     t.index ["exercise_type_id"], name: "index_exercises_on_exercise_type_id"
     t.index ["workout_id"], name: "index_exercises_on_workout_id"
+  end
+
+  create_table "muscle_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_26_234425) do
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
+  add_foreign_key "exercise_types", "muscle_groups"
   add_foreign_key "exercises", "workouts"
   add_foreign_key "workouts", "users"
 end
