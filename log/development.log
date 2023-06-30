@@ -3728,3 +3728,562 @@ FOREIGN KEY ("user_id")
   [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMuscleGroups (20230628233306)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628233306"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "muscle_groups"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL, CONSTRAINT "fk_rails_6535b2ad08"
+FOREIGN KEY ("exercise_type_id")
+  REFERENCES "exercise_types" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Delete All (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "muscle_groups"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL, CONSTRAINT "fk_rails_6535b2ad08"
+FOREIGN KEY ("exercise_type_id")
+  REFERENCES "exercise_types" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddMuscleGroupToExerciseType (20230628234122)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "exercise_types"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "exercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "exercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddMuscleGroupToExerciseType (20230628234122)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "exercise_types"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "exercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "exercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddMuscleGroupToExerciseType (20230628234122)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "exercise_types"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "exercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "exercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Delete All (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "muscle_groups"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL, CONSTRAINT "fk_rails_6535b2ad08"
+FOREIGN KEY ("exercise_type_id")
+  REFERENCES "exercise_types" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddMuscleGroupToExerciseType (20230628234122)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "exercise_types"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "exercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "exercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mExerciseType Update All (0.2ms)[0m  [1m[33mUPDATE "exercise_types" SET "muscle_group_id" = ?[0m  [["muscle_group_id", nil]]
+  [1m[36mMuscleGroup Update All (0.1ms)[0m  [1m[33mUPDATE "muscle_groups" SET "exercise_type_id" = ?[0m  [["exercise_type_id", nil]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddMuscleGroupToExerciseType (20230628234122)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "exercise_types"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "exercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "exercise_types" ("id","name","muscle_group","created_at","updated_at")
+                     SELECT "id","name","muscle_group","created_at","updated_at" FROM "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Delete All (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddExerciseTypeToMuscleGroups (20230628233831)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "muscle_groups"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL, CONSTRAINT "fk_rails_6535b2ad08"
+FOREIGN KEY ("exercise_type_id")
+  REFERENCES "exercise_types" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628233831"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddMuscleGroupToExerciseType (20230628234122)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "exercise_types" ADD "muscle_group_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_exercise_types_on_muscle_group_id" ON "exercise_types" ("muscle_group_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aexercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aexercise_types_on_muscle_group_id" ON "aexercise_types" ("muscle_group_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aexercise_types" ("id","name","muscle_group","created_at","updated_at","muscle_group_id")
+                     SELECT "id","name","muscle_group","created_at","updated_at","muscle_group_id" FROM "exercise_types"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "exercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "exercise_types" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "muscle_group" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "muscle_group_id" integer DEFAULT NULL, CONSTRAINT "fk_rails_3339311431"
+FOREIGN KEY ("muscle_group_id")
+  REFERENCES "muscle_groups" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_exercise_types_on_muscle_group_id" ON "exercise_types" ("muscle_group_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "exercise_types" ("id","name","muscle_group","created_at","updated_at","muscle_group_id")
+                     SELECT "id","name","muscle_group","created_at","updated_at","muscle_group_id" FROM "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aexercise_types"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628234122"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to RemoveExerciseTypeFromMuscleGroup (20230628234429)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_muscle_groups_on_exercise_type_id" ON "muscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amuscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "exercise_type_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_amuscle_groups_on_exercise_type_id" ON "amuscle_groups" ("exercise_type_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "amuscle_groups" ("id","name","created_at","updated_at","exercise_type_id")
+                     SELECT "id","name","created_at","updated_at","exercise_type_id" FROM "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "muscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "muscle_groups" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("id","name","created_at","updated_at")
+                     SELECT "id","name","created_at","updated_at" FROM "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "amuscle_groups"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230628234429"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.2ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Shoulder"], ["created_at", "2023-06-28 23:51:08.371724"], ["updated_at", "2023-06-28 23:51:08.371724"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Leg"], ["created_at", "2023-06-28 23:51:08.373380"], ["updated_at", "2023-06-28 23:51:08.373380"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Core"], ["created_at", "2023-06-28 23:51:08.374544"], ["updated_at", "2023-06-28 23:51:08.374544"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.2ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Shoulder"], ["created_at", "2023-06-28 23:51:45.181244"], ["updated_at", "2023-06-28 23:51:45.181244"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Leg"], ["created_at", "2023-06-28 23:51:45.182957"], ["updated_at", "2023-06-28 23:51:45.182957"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Back"], ["created_at", "2023-06-28 23:51:45.184133"], ["updated_at", "2023-06-28 23:51:45.184133"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Chest"], ["created_at", "2023-06-28 23:51:45.185223"], ["updated_at", "2023-06-28 23:51:45.185223"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mMuscleGroup Load (0.0ms)[0m  [1m[34mSELECT "muscle_groups".* FROM "muscle_groups"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.2ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.1ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.1ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.1ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 4]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.1ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 5]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.1ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 6]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Destroy (0.1ms)[0m  [1m[31mDELETE FROM "muscle_groups" WHERE "muscle_groups"."id" = ?[0m  [["id", 7]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.2ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Shoulder"], ["created_at", "2023-06-28 23:52:44.425530"], ["updated_at", "2023-06-28 23:52:44.425530"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Leg"], ["created_at", "2023-06-28 23:52:44.427187"], ["updated_at", "2023-06-28 23:52:44.427187"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Back"], ["created_at", "2023-06-28 23:52:44.428371"], ["updated_at", "2023-06-28 23:52:44.428371"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMuscleGroup Create (0.1ms)[0m  [1m[32mINSERT INTO "muscle_groups" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Chest"], ["created_at", "2023-06-28 23:52:44.429546"], ["updated_at", "2023-06-28 23:52:44.429546"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/exercise_types" for ::1 at 2023-06-28 20:03:17 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ExerciseTypesController#index as HTML
+Filter chain halted as :authenticate_user! rendered or redirected
+Completed 401 Unauthorized in 13ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 5192)
+
+
+Started GET "/exercise_types" for ::1 at 2023-06-28 20:03:43 -0400
+Processing by ExerciseTypesController#index as */*
+Filter chain halted as :authenticate_user! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 276)
+
+
+Started POST "/auth/" for ::1 at 2023-06-28 20:04:00 -0400
+Processing by DeviseTokenAuth::RegistrationsController#create as */*
+  Parameters: {"email"=>"four@gmail.com", "first_name"=>"four", "last_name"=>"lee", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) AND "users"."provider" = ? LIMIT ?[0m  [["email", "four@gmail.com"], ["provider", "email"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 275ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 19434)
+
+
+Started POST "/auth/sign_in" for ::1 at 2023-06-28 20:04:08 -0400
+Processing by DeviseTokenAuth::SessionsController#create as */*
+  Parameters: {"email"=>"third@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? AND "users"."provider" = ? LIMIT ?[0m  [["email", "third@gmail.com"], ["provider", "email"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ? [0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "tokens" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["tokens", "[FILTERED]"], ["updated_at", "2023-06-29 00:04:09.168933"], ["id", 3]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ? [0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "tokens" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["tokens", "[FILTERED]"], ["updated_at", "2023-06-29 00:04:09.237707"], ["id", 3]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Completed 200 OK in 394ms (Views: 0.1ms | ActiveRecord: 1.6ms | Allocations: 14983)
+
+
+Started GET "/exercise_types" for ::1 at 2023-06-28 20:04:35 -0400
+Processing by ExerciseTypesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."uid" = ? LIMIT ?[0m  [["uid", "third@gmail.com"], ["LIMIT", 1]]
+Filter chain halted as :authenticate_user! rendered or redirected
+Completed 401 Unauthorized in 146ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 1544)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFoodTypes (20230630200530)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "food_types" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "display_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230630200530"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMealTypes (20230630201106)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "meal_types" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "display_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230630201106"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
