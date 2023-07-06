@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     sessions: 'sessions'
   }
-  resources :workouts, only: [:index, :show, :update, :destroy]
+
+  resources :users do
+    resources :workouts, only: [:index, :show, :update, :destroy]
+  end
+  
   post '/workout', to: 'workouts#create'
 
   resources :exercises, only: [:index, :show, :create, :update, :destroy]

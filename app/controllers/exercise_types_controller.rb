@@ -1,6 +1,5 @@
 class ExerciseTypesController < ApplicationController
   before_action :set_exercise_type, only: [:show, :update, :destroy]
-  before_action :authenticate_user!
 
   def index
     @exercise_types = ExerciseType.all
@@ -8,7 +7,7 @@ class ExerciseTypesController < ApplicationController
   end
 
   def create
-    @exercise_type =exercise_type.new(exercise_type_params)
+    @exercise_type = exercise_type.new(exercise_type_params)
 
     if @exercise_type.save
       render json: @exercise_type, status: :created

@@ -3,10 +3,10 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts
   def index
-    @workouts = Workout.all
+    @workouts = Workout.where(user_id: params[:user_id])
     render json: @workouts
   end
-
+  
   # GET /workouts/:id
   def show
     render json: @workout
@@ -43,7 +43,7 @@ class WorkoutsController < ApplicationController
   private 
 
   def set_workout
-    @workout = Workout.find(params[:id])
+    @workout = current_user.workouts.find(params[:id])
   end
 
   def workout_params
