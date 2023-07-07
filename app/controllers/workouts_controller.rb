@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   def index
     @workouts = Workout.where(user_id: params[:user_id])
-    render json: @workouts
+    render json: @workouts, include: :exercises
   end
   
   # GET /workouts/:id
