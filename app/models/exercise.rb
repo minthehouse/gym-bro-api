@@ -7,4 +7,8 @@ class Exercise < ApplicationRecord
 
   attribute :exercise_type_id, :integer
   attribute :set_number, :integer
+
+  def exercise_type_name
+    exercise_type.name
+  end
 end

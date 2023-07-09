@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   def index
     @workouts = Workout.where(user_id: params[:user_id])
-    render json: @workouts, include: :exercises
+    render json: @workouts, include: { exercises: { methods: :exercise_type_name } }
   end
   
   # GET /workouts/:id
@@ -16,7 +16,6 @@ class WorkoutsController < ApplicationController
 
   def create
     workout_params = params.require(:workout).permit(:user_id, :start_at, :end_at, :duration_in_minutes, exercises_attributes: [:set_number, :weight, :rep, :exercise_type_id])
-    
     @workout = Workout.new(workout_params)
     
     if @workout.save
