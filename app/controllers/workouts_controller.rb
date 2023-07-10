@@ -15,7 +15,7 @@ class WorkoutsController < ApplicationController
   # POST /workouts
 
   def create
-    workout_params = params.require(:workout).permit(:user_id, :start_at, :end_at, :duration_in_minutes, exercises_attributes: [:set_number, :weight, :rep, :exercise_type_id])
+    workout_params = params.require(:workout).permit(:user_id, :start_at, :end_at, exercises_attributes: [:set_number, :weight, :rep, :exercise_type_id])
     @workout = Workout.new(workout_params)
     
     if @workout.save
@@ -46,7 +46,7 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(:user_id, :start_at, :end_at, :duration_in_minutes, exercises_attributes: [:set_number, :weight, :rep, :exercise_type_id])
+    params.require(:workout).permit(:user_id, :start_at, :end_at, exercises_attributes: [:set_number, :weight, :rep, :exercise_type_id])
   end
   
 end

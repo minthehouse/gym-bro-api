@@ -4,7 +4,6 @@ class Workout < ApplicationRecord
 
   attribute :start_at, :datetime
   attribute :end_at, :datetime
-  attribute :duration_in_minutes, :integer
 
   validate :must_have_at_least_one_exercise
   validate :valid_start_at?

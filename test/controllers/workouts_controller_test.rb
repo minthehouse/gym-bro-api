@@ -12,7 +12,6 @@ class WorkoutsControllerTest < ActionDispatch::IntegrationTest
           user_id: @user.id,
           start_at: DateTime.now - 2.hours,
           end_at: DateTime.now - 1.hour,
-          duration_in_minutes: 60,
           exercises_attributes: [
             { name: 'benchpress', weight: 135, rep: 3, exercise_type_id: 298486374 },
             { name: 'squats', weight: 225, rep: 5, exercise_type_id: 980190962 }
