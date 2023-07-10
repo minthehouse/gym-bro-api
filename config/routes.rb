@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :exercises, only: [:index, :show, :create, :update, :destroy]
   resources :exercise_types, only: [:index, :show, :create, :update, :destroy]
 
+  get '/foods/search', to: 'foods#search'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

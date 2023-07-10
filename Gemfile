@@ -77,3 +77,5 @@ gem 'rack-cors'
 gem 'devise_token_auth', git: "https://github.com/lynndylanhurley/devise_token_auth"
 
 gem 'omniauth'
+
+gem 'dotenv-rails', groups: [:development, :test]
