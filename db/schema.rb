@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_10_220127) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_12_000200) do
+  create_table "diets", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_diets_on_user_id"
+  end
+
   create_table "exercise_types", force: :cascade do |t|
     t.string "name"
     t.string "muscle_group"
@@ -40,9 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_220127) do
 
   create_table "foods", force: :cascade do |t|
     t.string "name"
-    t.float "calories"
+    t.decimal "calories", precision: 10, scale: 2
     t.float "protein"
-    t.float "carbohydrates"
+    t.decimal "carbohydrates", precision: 10, scale: 2
     t.float "fat"
     t.integer "diet_id"
     t.integer "meal_type_id"
@@ -98,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_10_220127) do
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
+  add_foreign_key "diets", "users"
   add_foreign_key "exercise_types", "muscle_groups"
   add_foreign_key "exercises", "workouts"
   add_foreign_key "foods", "diets"

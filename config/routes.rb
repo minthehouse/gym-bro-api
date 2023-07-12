@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :exercise_types, only: [:index, :show, :create, :update, :destroy]
 
   get '/foods/search', to: 'foods#search'
+  post '/diet', to: 'diets#create'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
