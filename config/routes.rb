@@ -18,12 +18,14 @@ Rails.application.routes.draw do
   post '/workout', to: 'workouts#create'
 
   resources :exercises, only: [:index, :show, :create, :update, :destroy]
-  resources :exercise_types, only: [:index, :show, :create, :update, :destroy]
-
+  resources :exercise_types, only: [:index, :show, :destroy] do
+    collection do
+      get 'search'
+    end
+  end
   get '/foods/search', to: 'foods#search'
-  post '/diet', to: 'diets#create'
+  resources :diets, only: [:index, :show, :create]
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
