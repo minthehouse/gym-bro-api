@@ -79,3 +79,5 @@ gem 'devise_token_auth', git: "https://github.com/lynndylanhurley/devise_token_a
 gem 'omniauth'
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'active_model_serializers'
