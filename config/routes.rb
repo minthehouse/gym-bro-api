@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :workouts, only: [:index, :show, :update, :destroy] do
       member do
-        get :previous_workout
+        get :previous_workout, :next_workout
       end
     end
   end

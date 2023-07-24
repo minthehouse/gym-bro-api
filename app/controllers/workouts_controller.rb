@@ -52,6 +52,19 @@ class WorkoutsController < ApplicationController
     end
   end
 
+  # GET /users/:user_id/workouts/:id/next_workout
+  def next_workout
+    current_workout = current_user.workouts.find(params[:id])
+    next_workout = current_user.workouts.where("id > ?", current_workout.id).order(id: :asc).first
+
+    if next_workout
+      custom_response = build_custom_response(next_workout)
+      render json: custom_response
+    else
+      render json: { message: "No next workout found." }, status: :not_found
+    end
+  end
+
   private 
 
   def set_workout
