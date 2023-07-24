@@ -41,13 +41,14 @@ class WorkoutsController < ApplicationController
 
   # GET /users/:user_id/workouts/:id/previous_workout
   def previous_workout
-    current_workout = Workout.find(params[:id])
+    current_workout = current_user.workouts.find(params[:id])
     previous_workout = current_user.workouts.where("id < ?", current_workout.id).order(id: :desc).first
 
     if previous_workout
-      render json: previous_workout
+      custom_response = build_custom_response(previous_workout)
+      render json: custom_response
     else
-      render json: { message: "No previous workout found" }, status: :not_found
+      render json: { message: "No previous workout found." }, status: :not_found
     end
   end
 
@@ -59,6 +60,17 @@ class WorkoutsController < ApplicationController
 
   def workout_params
     params.require(:workout).permit(:user_id, :start_at, :end_at, exercises_attributes: [:set_number, :weight, :rep, :exercise_type_id])
+  end
+
+  def build_custom_response(workout)
+    custom_response = {
+      id: workout.id,
+      start_at: workout.start_at,
+      end_at: workout.end_at,
+      exercises: ActiveModelSerializers::SerializableResource.new(workout.exercises, each_serializer: ExerciseSerializer).as_json
+    }
+
+    custom_response
   end
   
 end
