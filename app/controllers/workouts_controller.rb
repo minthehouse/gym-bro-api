@@ -39,6 +39,18 @@ class WorkoutsController < ApplicationController
     head :no_content
   end
 
+  # GET /users/:user_id/workouts/:id/previous_workout
+  def previous_workout
+    current_workout = Workout.find(params[:id])
+    previous_workout = current_user.workouts.where("id < ?", current_workout.id).order(id: :desc).first
+
+    if previous_workout
+      render json: previous_workout
+    else
+      render json: { message: "No previous workout found" }, status: :not_found
+    end
+  end
+
   private 
 
   def set_workout
