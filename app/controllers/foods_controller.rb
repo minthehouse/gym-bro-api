@@ -29,10 +29,10 @@ class FoodsController < ApplicationController
     simplified_foods = foods.map do |food|
       {
         name: food['description'],
-        kcal: extract_nutrient_value(food, 'Energy'),
+        calories: extract_nutrient_value(food, 'Energy'),
         protein: extract_nutrient_value(food, 'Protein'),
         fat: extract_nutrient_value(food, 'Total lipid (fat)'),
-        carbohydrate: extract_nutrient_value(food, 'Carbohydrate, by difference')
+        carbohydrates: extract_nutrient_value(food, 'Carbohydrate, by difference')
       }
     end
 
