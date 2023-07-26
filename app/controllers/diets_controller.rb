@@ -1,4 +1,11 @@
 class DietsController < ApplicationController
+  # GET /diets
+  def index
+    @diets = Diet.where(user_id: params[:user_id])
+    # render json: @diets, include: :foods
+    render json: @diets, include: { foods: { methods: :meal_type_name } }
+  end
+
   def create
     diet = Diet.new(diet_params)
 

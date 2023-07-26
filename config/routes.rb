@@ -17,9 +17,11 @@ Rails.application.routes.draw do
         get :previous_workout, :next_workout
       end
     end
+    resources :diets, only: [:index, :show, :update, :destroy]
   end
   
   post '/workout', to: 'workouts#create'
+  post '/diet', to: 'diets#create'
 
   resources :exercises, only: [:index, :show, :create, :update, :destroy]
   resources :exercise_types, only: [:index, :show, :destroy] do
@@ -27,8 +29,8 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+
   get '/foods/search', to: 'foods#search'
-  resources :diets, only: [:index, :show, :create]
 
 
   # Defines the root path route ("/")
