@@ -1,6 +1,7 @@
 class Diet < ApplicationRecord
   belongs_to :user
   has_many :foods  # Add inverse_of to maintain the association
+  attribute :taken_at, :datetime
 
   validate :must_have_at_least_one_food
 

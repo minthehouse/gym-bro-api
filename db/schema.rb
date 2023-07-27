@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_12_000200) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_27_214657) do
   create_table "diets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "taken_at"
     t.index ["user_id"], name: "index_diets_on_user_id"
   end
 

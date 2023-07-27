@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       end
     end
     resources :diets, only: [:index, :show, :update, :destroy]
+    get 'diets/find_by_date/:date', to: 'diets#find_by_date', as: :find_diet_by_date
+    get 'diets/find_the_latest_diet', to: 'diets#find_the_latest_diet', as: :find_the_latest_diet
   end
   
   post '/workout', to: 'workouts#create'
