@@ -17,13 +17,18 @@ Rails.application.routes.draw do
         get :previous_workout, :next_workout
       end
     end
-    resources :diets, only: [:index, :show, :update, :destroy]
-    get 'diets/find_by_date/:date', to: 'diets#find_by_date', as: :find_diet_by_date
-    get 'diets/find_the_latest_diet', to: 'diets#find_the_latest_diet', as: :find_the_latest_diet
+
+    resources :diets, only: [:index, :show, :update, :destroy] do
+      member do
+        get 'find_by_date/:date', action: 'find_by_date', as: :find_by_date
+        get 'find_the_latest_diet', action: 'find_the_latest_diet', as: :find_the_latest_diet
+      end
+    end
   end
-  
+
   post '/workout', to: 'workouts#create'
   post '/diet', to: 'diets#create'
+  put '/diets/:id', to: 'diets#update'
 
   resources :exercises, only: [:index, :show, :create, :update, :destroy]
   resources :exercise_types, only: [:index, :show, :destroy] do
@@ -33,7 +38,6 @@ Rails.application.routes.draw do
   end
 
   get '/foods/search', to: 'foods#search'
-
 
   # Defines the root path route ("/")
   # root "articles#index"
