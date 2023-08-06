@@ -52,7 +52,7 @@ class DietsController < ApplicationController
   private
 
   def diet_params
-    params.require(:diet).permit(:user_id, :taken_at, foods_attributes: [:id, :name, :calories, :protein, :fat, :carbohydrates, :meal_type_id])
+    params.require(:diet).permit(:user_id, :taken_at, foods_attributes: [:id, :name, :calories, :protein, :fat, :carbohydrates, :meal_type_id, :serving_weight])
   end
 
   def record_not_found
