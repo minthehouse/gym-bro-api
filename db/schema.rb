@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_214657) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_221039) do
   create_table "diets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_214657) do
     t.integer "meal_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "serving_weight", default: 100
     t.index ["diet_id"], name: "index_foods_on_diet_id"
     t.index ["meal_type_id"], name: "index_foods_on_meal_type_id"
   end
