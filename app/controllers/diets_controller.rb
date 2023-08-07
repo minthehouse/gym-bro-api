@@ -68,7 +68,10 @@ class DietsController < ApplicationController
       return
     end
 
-    @diet = Diet.find_by(user_id: user_id, created_at: date.beginning_of_day..date.end_of_day)
+    # Convert the date to UTC before using it in the query
+    date_utc = date.utc
+
+    @diet = Diet.find_by(user_id: user_id, created_at: date_utc.beginning_of_day..date_utc.end_of_day)
 
     if @diet
       render json: @diet, include: { foods: { methods: :meal_type_name } }
