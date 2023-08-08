@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       end
     end
 
+  resources :users, only: [:show, :update] 
+
     resources :diets, only: [:index, :show, :update, :destroy] do
       member do
         get 'find_by_date/:date', action: 'find_by_date', as: :find_by_date
