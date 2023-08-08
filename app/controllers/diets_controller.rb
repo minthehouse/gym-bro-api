@@ -68,10 +68,10 @@ class DietsController < ApplicationController
       return
     end
 
-    # Convert the date to UTC before using it in the query
-    date_utc = date.utc
+    # Convert the date to a Time object in your app's default time zone
+    date_time = date.to_time.in_time_zone
 
-    @diet = Diet.find_by(user_id: user_id, created_at: date_utc.beginning_of_day..date_utc.end_of_day)
+    @diet = Diet.find_by(user_id: user_id, created_at: date_time.beginning_of_day..date_time.end_of_day)
 
     if @diet
       render json: @diet, include: { foods: { methods: :meal_type_name } }
