@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_020649) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_000257) do
   create_table "diets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -118,5 +118,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_020649) do
   add_foreign_key "exercises", "workouts"
   add_foreign_key "foods", "diets"
   add_foreign_key "foods", "meal_types"
+  add_foreign_key "nutrition_goals", "users"
   add_foreign_key "workouts", "users"
 end
