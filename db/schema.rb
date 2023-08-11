@@ -118,6 +118,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_000257) do
   add_foreign_key "exercises", "workouts"
   add_foreign_key "foods", "diets"
   add_foreign_key "foods", "meal_types"
-  add_foreign_key "nutrition_goals", "users"
   add_foreign_key "workouts", "users"
 end
