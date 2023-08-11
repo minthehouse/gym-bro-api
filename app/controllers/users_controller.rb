@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
   def update
-    # Find the user by the provided userId
-    user = User.find(params[:id])
+    user = User.find(params[:id]) # Find the user by the provided userId
 
-    # Update the user with the provided params
     if user.update(user_params)
-      user.calculate_and_set_additional_attributes(user_params)
-
       render json: user, status: :ok
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
