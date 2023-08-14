@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_001148) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_221935) do
   create_table "diets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -21,7 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_001148) do
 
   create_table "exercise_types", force: :cascade do |t|
     t.string "name"
-    t.string "muscle_group"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "muscle_group_id"
