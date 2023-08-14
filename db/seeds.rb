@@ -14,8 +14,21 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+MuscleGroup.transaction do
+  shoulder_group = MuscleGroup.find_or_create_by(name: 'Shoulder')
+  leg_group = MuscleGroup.find_or_create_by(name: 'Leg')
+  back_group = MuscleGroup.find_or_create_by(name: 'Back')
+  chest_group = MuscleGroup.find_or_create_by(name: 'Chest')
+end
 
-MuscleGroup.create(name: 'Shoulder')
-MuscleGroup.create(name: 'Leg')
-MuscleGroup.create(name: 'Back')
-MuscleGroup.create(name: 'Chest')
+MealType.transaction do
+  MealType.find_or_create_by(name: 'breakfast', display_name: 'Breakfast')
+  MealType.find_or_create_by(name: 'lunch', display_name: 'Lunch')
+  MealType.find_or_create_by(name: 'dinner', display_name: 'Dinner')
+  MealType.find_or_create_by(name: 'snack', display_name: 'Snack')
+end
+
+ExerciseType.transaction do
+  chest_group = MuscleGroup.find_by(name: 'Chest')
+  ExerciseType.find_or_create_by(name: 'Bench Press', muscle_group: chest_group)
+end
