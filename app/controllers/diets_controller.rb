@@ -13,12 +13,51 @@ class DietsController < ApplicationController
   def update
     @diet = Diet.find(params[:id])
 
+    # Clear existing food items associated with the diet
+    @diet.foods.destroy_all
+
     if @diet.update(diet_params)
       render json: @diet, include: { foods: { methods: :meal_type_name } }
     else
       render json: { errors: @diet.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
+
+  # # PUT /diets/:id
+  # def update
+  #   @diet = Diet.find(params[:id])
+
+  #   # Extract the new list of food items from the request
+  #   new_food_items = params[:diet][:foods_attributes]
+
+  #   # Create a map of food item names to their attributes for faster lookup
+  #   new_food_items_map = new_food_items.index_by { |food| food[:name] }
+
+  #   # Iterate through the existing food items and update or delete as needed
+  #   @diet.foods.each do |existing_food|
+  #     if new_food_items_map.key?(existing_food.name)
+  #       # Food item exists in the new list, update it
+  #       new_attributes = new_food_items_map[existing_food.name]
+  #       existing_food.update(new_attributes)
+  #       new_food_items_map.delete(existing_food.name) # Remove from the map
+  #     else
+  #       # Food item doesn't exist in the new list, delete it
+  #       existing_food.destroy
+  #     end
+  #   end
+
+  #   # Create new food items for any remaining items in the new list
+  #   new_food_items_map.each_value do |attributes|
+  #     @diet.foods.create(attributes)
+  #   end
+
+  #   if @diet.save
+  #     render json: @diet, include: { foods: { methods: :meal_type_name } }
+  #   else
+  #     render json: { errors: @diet.errors.full_messages }, status: :unprocessable_entity
+  #   end
+  # end
 
   # GET /diets
   def index
@@ -52,7 +91,11 @@ class DietsController < ApplicationController
   private
 
   def diet_params
-    params.require(:diet).permit(:user_id, :taken_at, foods_attributes: [:id, :name, :calories, :protein, :fat, :carbohydrates, :meal_type_id, :serving_weight])
+    params.require(:diet).permit(
+      :user_id,
+      :taken_at,
+      foods_attributes: [:id, :name, :calories, :protein, :fat, :carbohydrates, :meal_type_id, :serving_weight]
+    )
   end
 
   def record_not_found
