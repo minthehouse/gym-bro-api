@@ -1,4 +1,6 @@
 class DietsController < ApplicationController
+  before_action :set_diet, only: [:update, :destroy]
+
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   def show
     if params[:date].present?
@@ -11,17 +13,17 @@ class DietsController < ApplicationController
 
   # PUT /diets/:id
   def update
-    @diet = Diet.find(params[:id])
+    # @diet = Diet.find(params[:id])
 
-    # Clear existing food items associated with the diet
-    @diet.foods.destroy_all
-
+    # # Clear existing food items associated with the diet
+    # @diet.foods.destroy_all
     if @diet.update(diet_params)
       render json: @diet, include: { foods: { methods: :meal_type_name } }
     else
       render json: { errors: @diet.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
 
 
   # # PUT /diets/:id
@@ -90,11 +92,15 @@ class DietsController < ApplicationController
 
   private
 
+  def set_diet
+    @diet = current_user.diets.find(params[:id])
+  end
+
   def diet_params
     params.require(:diet).permit(
       :user_id,
       :taken_at,
-      foods_attributes: [:id, :name, :calories, :protein, :fat, :carbohydrates, :meal_type_id, :serving_weight]
+      foods_attributes: [:name, :calories, :protein, :fat, :carbohydrates, :meal_type_id, :serving_weight]
     )
   end
 
